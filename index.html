@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>8-sinf fizika · II bob: Elektr hodisalari</title>
+<style>
+:root{color-scheme:light;--bg:#eef2f7;--card:#fff;--ink:#14213d;--mute:#5b6784;--line:#cfd8e6;--acc:#2f5bea;--pos:#e03131;--neg:#1c7ed6;--amb:#f59f00}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){color-scheme:dark;--bg:#0f1626;--card:#18223a;--ink:#e6ecf8;--mute:#9aa7c4;--line:#2c3a5c;--acc:#7b9bff;--pos:#ff6b6b;--neg:#4dabf7;--amb:#ffc53d}}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:12px}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 "Segoe UI",system-ui,-apple-system,Roboto,sans-serif;padding:env(safe-area-inset-top,0) 0 env(safe-area-inset-bottom,0)}
+main{max-width:760px;margin:0 auto;padding:20px 16px 60px}
+h1{font-size:clamp(1.7rem,6vw,2.4rem);line-height:1.15;margin:.2em 0 .3em;letter-spacing:-.02em}
+h2{font-size:1.35rem;margin:0 0 .4em}
+.sub{color:var(--mute);margin:0 0 20px}
+.plan{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 18px;margin-bottom:28px}
+.plan ol{margin:6px 0 0;padding-left:22px}
+.plan a{color:var(--acc);text-decoration:none}
+.plan a:hover,.plan a:focus-visible{text-decoration:underline}
+section{margin:0 0 36px;padding-top:8px;border-top:3px solid var(--acc)}
+.formula{display:inline-block;background:var(--card);border:1px solid var(--line);border-radius:6px;padding:2px 10px;font-family:ui-monospace,Consolas,monospace;margin:2px 0}
+.sim{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px;margin-top:12px}
+canvas{display:block;width:100%;height:auto;touch-action:none;border-radius:6px}
+.row{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;margin-top:8px}
+label{display:flex;flex-direction:column;font-size:.9rem;color:var(--mute);min-width:140px;flex:1}
+input[type=range]{width:100%;accent-color:var(--acc)}
+button{font:inherit;background:var(--acc);color:#fff;border:0;border-radius:8px;padding:8px 16px;cursor:pointer}
+button.alt{background:transparent;color:var(--ink);border:1px solid var(--line)}
+button:focus-visible,input:focus-visible,a:focus-visible{outline:3px solid var(--amb);outline-offset:2px}
+.out{font-family:ui-monospace,Consolas,monospace;font-size:.95rem;margin-top:8px;min-height:1.6em}
+table{border-collapse:collapse;width:100%;margin-top:8px;font-size:.95rem}
+td,th{border-bottom:1px solid var(--line);padding:4px 6px;text-align:left}
+.bar{height:10px;background:var(--acc);border-radius:5px;transition:width .3s}
+.q{margin-top:10px;padding:10px 14px;border-left:4px solid var(--amb);background:var(--card)}
+details{background:var(--card);border:1px solid var(--line);border-radius:10px;margin:10px 0;padding:0 14px}
+summary{cursor:pointer;padding:10px 0;font-weight:600;color:var(--acc)}
+details[open]>summary{border-bottom:1px solid var(--line);margin-bottom:8px}
+details details{margin:8px 0;background:transparent}
+.goal{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--acc);border-radius:8px;padding:10px 16px;margin:10px 0}
+.goal ul,.steps,.obs{margin:4px 0 4px;padding-left:20px}
+.sol{font-family:ui-monospace,Consolas,monospace;font-size:.92rem;color:var(--ink);padding-bottom:8px}
+.hw{border-left:4px solid var(--amb);padding:8px 14px;background:var(--card);margin-top:10px}
+footer{color:var(--mute);font-size:.85rem}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.bar{transition:none}}
+</style>
+</head>
+<body>
+<main>
+<h1>Elektr hodisalari</h1>
+<p class="sub">8-sinf fizika · II bob · interaktiv simulyatsiyalar bilan</p>
+
+<nav class="plan" aria-label="Bob rejasi">
+<strong>Bob rejasi</strong>
+<ol>
+<li><a href="#m1">Jismlarning elektrlanishi. Elektr zaryadi</a></li>
+<li><a href="#m2">Kulon qonuni</a></li>
+<li><a href="#m3">Elektr maydon</a></li>
+<li><a href="#m4">Elektr toki. Om qonuni</a></li>
+<li><a href="#m5">O‘tkazgichlarni ketma-ket va parallel ulash</a></li>
+</ol>
+</nav>
+
+<section id="m1">
+<h2>1. Jismlarning elektrlanishi</h2><div class="goal"><b>O‘quv maqsadlari</b><ul><li>Elektrlanish hodisasini ishqalanish misolida tushuntira oladi.</li><li>Elektr zaryadining ikki turini (musbat va manfiy) farqlaydi.</li><li>Zaryad saqlanish qonunini va elementar zaryad e = 1,6·10⁻¹⁹ C ni biladi.</li><li>q = N·e formulasi bo‘yicha masalalar yecha oladi.</li></ul><p><b>Asosiy tushunchalar:</b> elektrlanish, elektr zaryadi, elementar zaryad, elektron, zaryadning saqlanish qonuni, o‘tkazgich, dielektrik, elektroskop</p></div><p>Ikki jism bir-biriga ishqalanganda ularning atomlaridagi elektronlarning bir qismi bir jismdan ikkinchisiga o‘tadi. Natijada jismlar elektr zaryadiga ega bo‘ladi, bu hodisa <b>elektrlanish</b> deyiladi.</p><p>Elektron ortiqcha bo‘lgan jism manfiy, elektron yetishmaydigan jism musbat zaryadlanadi. Shisha tayoqcha ipakka ishqalanganda musbat, ebonit tayoqcha mo‘ynaga ishqalanganda manfiy zaryadlanadi.</p><p>Zaryad miqdori kulon (C) bilan o‘lchanadi. Eng kichik zaryad (elektron zaryadi moduli) <b>e = 1,6·10⁻¹⁹ C</b>. Har qanday jism zaryadi e ning butun karralisi bo‘ladi.</p><p><b>Zaryadning saqlanish qonuni:</b> yopiq sistemada zaryadlarning algebraik yig‘indisi o‘zgarmaydi. Zaryad yo‘qolmaydi va yo‘qdan paydo bo‘lmaydi, faqat bir jismdan ikkinchisiga o‘tadi.</p><p><span class="formula">q = N · e</span> <span class="formula">q₁ + q₂ = q₁′ + q₂′</span></p>
+<div class="sim">
+<canvas id="c1" aria-label="Ishqalash orqali elektrlanish simulyatsiyasi"></canvas>
+<div class="row"><button id="rub">Ishqala</button><button class="alt" id="rub0">Boshidan</button></div>
+<div class="out" id="o1"></div>
+</div>
+<p><b>Simulyatsiya bilan ishlash</b></p><ol class="steps"><li>«Ishqala» tugmasini bir necha marta bosing. Tayoqchadagi «−» va matodagi «+» belgilar soniga e’tibor bering.</li><li>Tayoqchadagi elektronlar soni 2 dan oshganda qog‘oz parchalariga nima bo‘lishini kuzating.</li><li>«Boshidan» tugmasi bilan tajribani qaytaring.</li></ol><p><b>Kutiladigan kuzatishlar</b></p><ul class="obs"><li>Mato qancha elektron yo‘qotsa, tayoqcha shuncha elektron oladi, zaryadlar yig‘indisi o‘zgarmaydi.</li><li>Zaryadlangan tayoqcha neytral qog‘ozni tortadi.</li></ul><details><summary>Dars bosqichlari (45 daqiqa)</summary><table><tr><th>Vaqt</th><th>Bosqich</th><th>Faoliyat</th></tr><tr><td>5 daq</td><td>Tashkiliy qism, qiziqtiruvchi tajriba</td><td>Plastik tarog‘ni sochga ishqalab, qog‘oz parchalarini tortish. Savol: nega tortildi?</td></tr><tr><td>7 daq</td><td>Takrorlash</td><td>Modda tuzilishi: atom, yadro, elektron. 7-sinf mavzulari bo‘yicha qisqa so‘rov.</td></tr><tr><td>15 daq</td><td>Yangi mavzu</td><td>Ishqalanishda elektronlarning ko‘chishi. Zaryad turlari. Elementar zaryad. Saqlanish qonuni.</td></tr><tr><td>10 daq</td><td>Simulyatsiya</td><td>«Ishqala» tugmasi bilan elektronlar ko‘chishini kuzatish, jadvalni to‘ldirish.</td></tr><tr><td>6 daq</td><td>Mustahkamlash</td><td>Masalalar va test savollari.</td></tr><tr><td>2 daq</td><td>Baholash, uyga vazifa</td><td>Faol o‘quvchilarni baholash.</td></tr></table></details><details open><summary>Masalalar va yechimlar</summary><details><summary>1-masala: Tayoqchaga 5·10¹² ta elektron o‘tgan. Uning zaryadini toping.</summary><div class="sol">Yechim: q = N·e = 5·10¹²·1,6·10⁻¹⁹ = 8·10⁻⁷ C = 0,8 µC (manfiy).</div></details><details><summary>2-masala: Jism zaryadi −3,2 nC. Unda nechta ortiqcha elektron bor?</summary><div class="sol">Yechim: N = q/e = 3,2·10⁻⁹ / 1,6·10⁻¹⁹ = 2·10¹⁰ ta.</div></details><details><summary>3-masala: +4 nC va −8 nC zaryadli ikki bir xil sharcha tekkizilib ajratildi. Har birining zaryadi qancha?</summary><div class="sol">Yechim: Yig‘indi −4 nC, teng bo‘linadi: har biri −2 nC.</div></details></details><details><summary>Nazorat savollari</summary><ol><li>Elektrlanish nima? Misol keltiring.</li><li>Nega ipakka ishqalangan shisha tayoqcha musbat zaryadlanadi?</li><li>Elementar zaryad qiymati nechaga teng?</li><li>Zaryadning saqlanish qonunini ayting.</li></ol></details><div class="hw"><b>Uyga vazifa:</b> Darslikdagi mavzu matnini o‘qing, kundalik hayotdan elektrlanishga 3 ta misol yozing, 2 ta masala tuzib yeching.</div></section>
+
+<section id="m2">
+<h2>2. Kulon qonuni</h2><div class="goal"><b>O‘quv maqsadlari</b><ul><li>Ikki nuqtaviy zaryad o‘zaro ta’sir kuchini ta’riflaydi.</li><li>F = k|q₁q₂|/r² formulasini qo‘llaydi.</li><li>Kuchning zaryadlar va masofaga bog‘liqligini grafik va simulyatsiyada tahlil qiladi.</li></ul><p><b>Asosiy tushunchalar:</b> nuqtaviy zaryad, o‘zaro ta’sir kuchi, Kulon qonuni, proporsionallik koeffitsiyenti k</p></div><p>Fransuz fizigi Sharl Kulon (1785) torsion tarozi yordamida nuqtaviy zaryadlar o‘zaro ta’sirini o‘lchadi. <b>Nuqtaviy zaryad</b> deb, o‘lchami zaryadlar orasidagi masofadan ancha kichik bo‘lgan zaryadlangan jismga aytiladi.</p><p><b>Kulon qonuni:</b> vakuumda ikki nuqtaviy zaryadning o‘zaro ta’sir kuchi zaryadlar modullari ko‘paytmasiga to‘g‘ri, ular orasidagi masofa kvadratiga teskari proporsional va zaryadlarni tutashtiruvchi to‘g‘ri chiziq bo‘ylab yo‘naladi.</p><p>Koeffitsiyent <b>k = 9·10⁹ N·m²/C²</b>. Bir xil ishorali zaryadlar itarishadi, har xil ishoralilar tortishadi. Ikkala zaryadga ta’sir etuvchi kuchlar modul jihatdan teng, yo‘nalishi qarama-qarshi (Nyutonning uchinchi qonuni).</p><p><span class="formula">F = k · |q₁ · q₂| / r²</span> <span class="formula">k = 9·10⁹ N·m²/C²</span></p>
+<div class="sim">
+<canvas id="c2" aria-label="Kulon kuchi simulyatsiyasi"></canvas>
+<div class="row">
+<label>q₁ = <span id="v21"></span> µC<input type="range" id="q1" min="-5" max="5" step="1" value="3"></label>
+<label>q₂ = <span id="v22"></span> µC<input type="range" id="q2" min="-5" max="5" step="1" value="-2"></label>
+<label>r = <span id="v23"></span> sm<input type="range" id="r" min="5" max="50" step="1" value="20"></label>
+</div>
+<div class="out" id="o2"></div>
+</div>
+<p><b>Simulyatsiya bilan ishlash</b></p><ol class="steps"><li>q₁ = 3 µC, q₂ = 2 µC, r = 20 sm qilib kuchni yozib oling.</li><li>r ni 2 marta kamaytiring (10 sm). Kuch necha marta o‘zgardi?</li><li>q₂ ishorasini manfiyga o‘zgartiring. Strelkalar yo‘nalishi qanday o‘zgardi?</li><li>q₁ ni 2 marta oshiring. Kuch qanday o‘zgaradi?</li></ol><p><b>Kutiladigan kuzatishlar</b></p><ul class="obs"><li>r ikki marta kamaysa, kuch 4 marta ortadi.</li><li>Zaryadlardan biri 2 marta ortsa, kuch ham 2 marta ortadi.</li></ul><details><summary>Dars bosqichlari (45 daqiqa)</summary><table><tr><th>Vaqt</th><th>Bosqich</th><th>Faoliyat</th></tr><tr><td>4 daq</td><td>Tashkiliy qism, savol</td><td>Nega bir xil zaryadlar itarishadi, har xil zaryadlar tortishadi?</td></tr><tr><td>8 daq</td><td>Takrorlash</td><td>Zaryad turlari, q = N·e, kuch tushunchasi va birligi (N).</td></tr><tr><td>14 daq</td><td>Yangi mavzu</td><td>Kulon qonuni, k ning ma’nosi, kuch yo‘nalishi.</td></tr><tr><td>12 daq</td><td>Simulyatsiya</td><td>q₁, q₂, r ni o‘zgartirib kuchni o‘lchash, jadval tuzish.</td></tr><tr><td>5 daq</td><td>Mustahkamlash</td><td>Masalalar.</td></tr><tr><td>2 daq</td><td>Uyga vazifa</td><td></td></tr></table></details><details open><summary>Masalalar va yechimlar</summary><details><summary>1-masala: q₁ = 2 µC va q₂ = 3 µC zaryadlar r = 30 sm masofada. Kuchni toping.</summary><div class="sol">Yechim: F = 9·10⁹·2·10⁻⁶·3·10⁻⁶ / 0,3² = 0,054 / 0,09 = 0,6 N.</div></details><details><summary>2-masala: Yuqoridagi masalada masofa 15 sm ga kamaytirilsa, kuch qancha bo‘ladi?</summary><div class="sol">Yechim: Masofa 2 marta kam, kuch 4 marta ortadi: F = 2,4 N.</div></details><details><summary>3-masala: Teng ikki zaryad 10 sm masofada 0,9 N kuch bilan itarishadi. Zaryadni toping.</summary><div class="sol">Yechim: q² = F·r²/k = 0,9·0,01/9·10⁹ = 10⁻¹², q = 10⁻⁶ C = 1 µC.</div></details></details><details><summary>Nazorat savollari</summary><ol><li>Nuqtaviy zaryad nima?</li><li>Kulon qonunini ta’riflang.</li><li>k koeffitsiyentining birligi nima?</li><li>Masofa 3 marta ortsa, kuch qanday o‘zgaradi?</li></ol></details><div class="hw"><b>Uyga vazifa:</b> Kulon qonuniga doir 3 ta masala yeching. Kuchning masofaga bog‘liqlik grafigini (F–r) chizing.</div></section>
+
+<section id="m3">
+<h2>3. Elektr maydon</h2><div class="goal"><b>O‘quv maqsadlari</b><ul><li>Elektr maydonni zaryad atrofidagi materiya shakli sifatida tushuntiradi.</li><li>Maydon kuchlanganligi E = F/q ni biladi va qo‘llaydi.</li><li>Kuch chiziqlarining yo‘nalishini aniqlay oladi.</li></ul><p><b>Asosiy tushunchalar:</b> elektr maydon, maydon kuchlanganligi, kuch chiziqlari, sinov zaryadi, bir jinsli maydon</p></div><p>Har qanday zaryad o‘z atrofida <b>elektr maydon</b> hosil qiladi. Maydon zaryadlarning o‘zaro ta’sirini uzatadi va unga kiritilgan boshqa zaryadga kuch bilan ta’sir qiladi.</p><p><b>Maydon kuchlanganligi</b> deb maydonning berilgan nuqtasiga kiritilgan sinov zaryadiga ta’sir etuvchi kuchning shu zaryad miqdoriga nisbatiga aytiladi. Birligi N/C. Yo‘nalishi musbat zaryadga ta’sir etuvchi kuch yo‘nalishi bilan bir xil.</p><p>Nuqtaviy zaryad maydonida E = k|q|/r². Maydonni <b>kuch chiziqlari</b> bilan tasvirlaymiz: ular musbat zaryaddan chiqib, manfiy zaryadga kiradi, hech qachon kesishmaydi, chiziqlar zich joyda maydon kuchli.</p><p><span class="formula">E = F / q</span> <span class="formula">E = k · |q| / r²</span> <span class="formula">F = q · E</span></p>
+<div class="sim">
+<canvas id="c3" aria-label="Elektr maydon simulyatsiyasi"></canvas>
+<div class="row"><button id="flip">Ikkinchi zaryad ishorasini almashtir</button></div>
+<div class="out">Zaryadlarni sichqoncha yoki barmoq bilan siljiting. Strelka qanchalik yorqin bo‘lsa, maydon shunchalik kuchli.</div>
+</div>
+<p><b>Simulyatsiya bilan ishlash</b></p><ol class="steps"><li>Zaryadlardan birini ikkinchisiga yaqinlashtirib, strelkalar yorqinligini kuzating.</li><li>«Ikkinchi zaryad ishorasini almashtir» tugmasini bosib, ikki holatni solishtiring: har xil ishorali (dipol) va bir xil ishorali.</li><li>Ikkala musbat zaryad o‘rtasidagi nuqtada maydonni toping.</li></ol><p><b>Kutiladigan kuzatishlar</b></p><ul class="obs"><li>Zaryadga yaqin joyda maydon kuchliroq.</li><li>Bir xil musbat zaryadlar orasida o‘rtada maydon kuchsiz, chunki ikki maydon bir-birini kamaytiradi.</li></ul><details><summary>Dars bosqichlari (45 daqiqa)</summary><table><tr><th>Vaqt</th><th>Bosqich</th><th>Faoliyat</th></tr><tr><td>4 daq</td><td>Tashkiliy qism</td><td>Savol: zaryadlar bir-biriga tegmasdan qanday ta’sirlashadi?</td></tr><tr><td>7 daq</td><td>Takrorlash</td><td>Kulon qonuni bo‘yicha qisqa test.</td></tr><tr><td>15 daq</td><td>Yangi mavzu</td><td>Maydon tushunchasi, kuchlanganlik, kuch chiziqlari.</td></tr><tr><td>12 daq</td><td>Simulyatsiya</td><td>Zaryadlarni siljitib maydon manzarasini kuzatish.</td></tr><tr><td>5 daq</td><td>Mustahkamlash</td><td>Masalalar.</td></tr><tr><td>2 daq</td><td>Uyga vazifa</td><td></td></tr></table></details><details open><summary>Masalalar va yechimlar</summary><details><summary>1-masala: q = 2 µC zaryadga maydonda F = 4 mN kuch ta’sir qiladi. Kuchlanganlikni toping.</summary><div class="sol">Yechim: E = F/q = 4·10⁻³ / 2·10⁻⁶ = 2000 N/C.</div></details><details><summary>2-masala: 10 nC nuqtaviy zaryaddan 3 sm masofada maydon kuchlanganligi qancha?</summary><div class="sol">Yechim: E = 9·10⁹·10⁻⁸ / (0,03)² = 90 / 9·10⁻⁴ = 10⁵ N/C.</div></details><details><summary>3-masala: E = 2·10⁴ N/C maydondagi 5 nC zaryadga ta’sir etuvchi kuchni toping.</summary><div class="sol">Yechim: F = qE = 5·10⁻⁹·2·10⁴ = 10⁻⁴ N.</div></details></details><details><summary>Nazorat savollari</summary><ol><li>Elektr maydon nima?</li><li>Kuch chiziqlari qanday yo‘naladi?</li><li>Kuchlanganlik birligi nima?</li><li>Maydon kuchli joyni chiziqlar zichligidan qanday bilasiz?</li></ol></details><div class="hw"><b>Uyga vazifa:</b> Musbat, manfiy va dipol zaryadlar uchun kuch chiziqlarini daftarga chizing. 2 ta masala yeching.</div></section>
+
+<section id="m4">
+<h2>4. Elektr toki. Om qonuni</h2><div class="goal"><b>O‘quv maqsadlari</b><ul><li>Elektr tokini zaryadlarning tartibli harakati sifatida ta’riflaydi.</li><li>I = q/t va I = U/R formulalarini qo‘llaydi.</li><li>Oddiy elektr zanjirini tushuntiradi va sxemasini chizadi.</li></ul><p><b>Asosiy tushunchalar:</b> elektr toki, tok kuchi, kuchlanish, qarshilik, elektr zanjiri, solishtirma qarshilik, ampermetr, voltmetr</p></div><p><b>Elektr toki</b> deb zaryadlangan zarralarning tartibli (yo‘nalgan) harakatiga aytiladi. Metallarda tokni erkin elektronlar hosil qiladi. Tok yo‘nalishi sifatida musbat zaryadlar harakati yo‘nalishi (manbaning «+» qutbidan «−» qutbiga) qabul qilingan, elektronlar esa teskari yo‘nalishda harakatlanadi.</p><p><b>Tok kuchi</b> o‘tkazgich ko‘ndalang kesimidan o‘tgan zaryadning vaqtga nisbati, birligi amper (A). <b>Kuchlanish</b> manba maydoni zaryadni ko‘chirishda bajargan ishning zaryadga nisbati, birligi volt (V). <b>Qarshilik</b> birligi om (Ω).</p><p><b>Om qonuni (zanjir qismi uchun):</b> tok kuchi kuchlanishga to‘g‘ri, qarshilikka teskari proporsional. O‘tkazgich qarshiligi R = ρ·l/S: uzunlikka to‘g‘ri, ko‘ndalang kesim yuziga teskari proporsional, ρ moddaga bog‘liq.</p><p><span class="formula">I = q / t</span> <span class="formula">I = U / R</span> <span class="formula">R = ρ · l / S</span></p>
+<div class="sim">
+<canvas id="c4" aria-label="Elektr zanjiri simulyatsiyasi"></canvas>
+<div class="row">
+<label>U = <span id="v41"></span> V<input type="range" id="u" min="1" max="12" step="1" value="6"></label>
+<label>R = <span id="v42"></span> Ω<input type="range" id="rr" min="1" max="20" step="1" value="6"></label>
+</div>
+<div class="out" id="o4"></div>
+</div>
+<p><b>Simulyatsiya bilan ishlash</b></p><ol class="steps"><li>U = 6 V, R = 6 Ω da tokni o‘qing (1 A).</li><li>R ni o‘zgarmas qoldirib, U ni 12 V gacha oshiring: tok va elektronlar tezligi qanday o‘zgardi?</li><li>U ni o‘zgarmas qoldirib R ni oshiring. Lampa yorqinligiga e’tibor bering.</li></ol><p><b>Kutiladigan kuzatishlar</b></p><ul class="obs"><li>U ortsa tok ortadi, lampa yorqinroq yonadi.</li><li>R ortsa tok kamayadi.</li></ul><details><summary>Dars bosqichlari (45 daqiqa)</summary><table><tr><th>Vaqt</th><th>Bosqich</th><th>Faoliyat</th></tr><tr><td>4 daq</td><td>Tashkiliy qism</td><td>Lampochka nega yonadi? Batareyaning vazifasi nima?</td></tr><tr><td>7 daq</td><td>Takrorlash</td><td>Elektr maydon, zaryad harakati.</td></tr><tr><td>15 daq</td><td>Yangi mavzu</td><td>Elektr toki, tok kuchi, kuchlanish, qarshilik, Om qonuni.</td></tr><tr><td>12 daq</td><td>Simulyatsiya</td><td>U va R ni o‘zgartirib I ni hisoblash, jadval va grafik.</td></tr><tr><td>5 daq</td><td>Mustahkamlash</td><td>Masalalar.</td></tr><tr><td>2 daq</td><td>Uyga vazifa</td><td></td></tr></table></details><details open><summary>Masalalar va yechimlar</summary><details><summary>1-masala: O‘tkazgich kesimidan 60 s da 30 C zaryad o‘tdi. Tok kuchini toping.</summary><div class="sol">Yechim: I = q/t = 30/60 = 0,5 A.</div></details><details><summary>2-masala: R = 4 Ω ga U = 12 V qo‘yilgan. Tok kuchini toping.</summary><div class="sol">Yechim: I = U/R = 12/4 = 3 A.</div></details><details><summary>3-masala: Lampochka 220 V da 0,5 A tok iste’mol qiladi. Qarshiligi qancha?</summary><div class="sol">Yechim: R = U/I = 220/0,5 = 440 Ω.</div></details><details><summary>4-masala: Mis sim: l = 100 m, S = 2 mm², ρ = 0,017 Ω·mm²/m. R = ?</summary><div class="sol">Yechim: R = ρl/S = 0,017·100/2 = 0,85 Ω.</div></details></details><details><summary>Nazorat savollari</summary><ol><li>Elektr toki nima va u qanday yo‘nalishda deb qabul qilingan?</li><li>Tok kuchi birligi nima?</li><li>Om qonunini ta’riflang.</li><li>Qarshilik qaysi kattaliklarga bog‘liq?</li></ol></details><div class="hw"><b>Uyga vazifa:</b> Oddiy zanjir sxemasini (manba, kalit, lampa, ampermetr, voltmetr) chizing va 3 ta masala yeching.</div></section>
+
+<section id="m5">
+<h2>5. Ketma-ket va parallel ulash</h2><div class="goal"><b>O‘quv maqsadlari</b><ul><li>Ketma-ket va parallel ulanishni sxemada farqlaydi.</li><li>Har ikki ulanish uchun I, U, R munosabatlarini biladi.</li><li>Aralash (oddiy) zanjirlar uchun masalalar yecha oladi.</li></ul><p><b>Asosiy tushunchalar:</b> ketma-ket ulanish, parallel ulanish, ekvivalent qarshilik, tarmoqlanish nuqtasi</p></div><p><b>Ketma-ket ulashda</b> o‘tkazgichlar bir-biriga ketma-ket ulanadi, tok yo‘li bitta. Tok kuchi hamma qismda bir xil, umumiy kuchlanish qismlar kuchlanishlari yig‘indisiga teng, umumiy qarshilik qarshiliklar yig‘indisiga teng.</p><p><b>Parallel ulashda</b> o‘tkazgichlarning boshlari bir nuqtaga, oxirlari ikkinchi nuqtaga ulanadi. Hamma shoxobchada kuchlanish bir xil, umumiy tok shoxobchalardagi toklar yig‘indisiga teng, umumiy qarshilikning teskari qiymati qarshiliklar teskari qiymatlari yig‘indisiga teng.</p><p>Parallel ulashda umumiy qarshilik eng kichik qarshilikdan ham kichik bo‘ladi, chunki tok o‘tishi uchun yangi yo‘l qo‘shiladi. Uylarda iste’molchilar parallel ulanadi, shuning uchun biri o‘chsa boshqalari ishlayveradi.</p><p><span class="formula">Ketma-ket: I = I₁ = I₂,  U = U₁ + U₂,  R = R₁ + R₂</span> <span class="formula">Parallel: U = U₁ = U₂,  I = I₁ + I₂,  1/R = 1/R₁ + 1/R₂</span></p>
+<div class="sim">
+<div class="row">
+<button id="ser">Ketma-ket</button><button class="alt" id="par">Parallel</button>
+</div>
+<div class="row">
+<label>R₁ = <span id="v51"></span> Ω<input type="range" id="r1" min="1" max="20" step="1" value="4"></label>
+<label>R₂ = <span id="v52"></span> Ω<input type="range" id="r2" min="1" max="20" step="1" value="12"></label>
+</div>
+<table id="t5"></table>
+<div style="margin-top:10px"><div class="bar" id="b5" style="width:50%"></div><small style="color:var(--mute)">Umumiy tok kuchi (shkala: 0–15 A)</small></div>
+</div>
+<p><b>Simulyatsiya bilan ishlash</b></p><ol class="steps"><li>«Ketma-ket» rejimida R₁ = 4 Ω, R₂ = 12 Ω qilib jadvalni to‘ldiring.</li><li>«Parallel» rejimiga o‘ting va jadvalni solishtiring.</li><li>R₂ ni 20 Ω gacha oshiring. Umumiy tok har ikki rejimda qanday o‘zgaradi?</li></ol><p><b>Kutiladigan kuzatishlar</b></p><ul class="obs"><li>Ketma-ket ulanishda umumiy R katta, tok kichik.</li><li>Parallel ulanishda umumiy R har bir qarshilikdan kichik, tok katta.</li></ul><details><summary>Dars bosqichlari (45 daqiqa)</summary><table><tr><th>Vaqt</th><th>Bosqich</th><th>Faoliyat</th></tr><tr><td>4 daq</td><td>Tashkiliy qism</td><td>Uydagi lampalar nega alohida o‘chadi va yonadi? Gulchambar-chi?</td></tr><tr><td>7 daq</td><td>Takrorlash</td><td>Om qonuni.</td></tr><tr><td>14 daq</td><td>Yangi mavzu</td><td>Ikki ulanish turi va ularning qonuniyatlari.</td></tr><tr><td>12 daq</td><td>Simulyatsiya</td><td>R₁, R₂ ni o‘zgartirib, ikki rejimni solishtirish.</td></tr><tr><td>6 daq</td><td>Mustahkamlash</td><td>Masalalar.</td></tr><tr><td>2 daq</td><td>Uyga vazifa</td><td></td></tr></table></details><details open><summary>Masalalar va yechimlar</summary><details><summary>1-masala: R₁ = 4 Ω va R₂ = 12 Ω ketma-ket, U = 12 V. R, I, U₁, U₂ ni toping.</summary><div class="sol">Yechim: R = 16 Ω; I = 12/16 = 0,75 A; U₁ = 0,75·4 = 3 V; U₂ = 0,75·12 = 9 V.</div></details><details><summary>2-masala: Xuddi shu qarshiliklar parallel ulangan, U = 12 V. R va I ni toping.</summary><div class="sol">Yechim: R = 4·12/16 = 3 Ω; I₁ = 3 A, I₂ = 1 A, I = 4 A.</div></details><details><summary>3-masala: Ikkita 6 Ω li qarshilik parallel ulandi. Umumiy qarshilik?</summary><div class="sol">Yechim: R = 6·6/12 = 3 Ω (bir xil n ta qarshilik uchun R/n).</div></details></details><details><summary>Nazorat savollari</summary><ol><li>Ketma-ket ulashda qaysi kattalik bir xil bo‘ladi?</li><li>Parallel ulashda-chi?</li><li>Parallel ulashda umumiy qarshilik nega kichrayadi?</li><li>Uylarda iste’molchilar qanday ulanadi va nega?</li></ol></details><div class="hw"><b>Uyga vazifa:</b> Ikkala ulanish uchun sxema chizing, formulalarni yozing, 4 ta masala yeching.</div></section>
+
+<footer>GitHub Pages uchun bitta fayl: <code>index.html</code>. Mavzular rejasini darslikdagi mundarijaga moslab o‘zgartirish mumkin.</footer>
+</main>
+
+<script>
+const $=s=>document.querySelector(s);
+const C=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const ctx=id=>{const c=$(id);c.width=600;c.height=300;return c.getContext("2d")};
+const fmt=(x,d=2)=>Number(x.toPrecision(3)).toString().replace(".",",");
+function arrow(g,x1,y1,x2,y2,col,w=2){const a=Math.atan2(y2-y1,x2-x1);g.strokeStyle=g.fillStyle=col;g.lineWidth=w;g.beginPath();g.moveTo(x1,y1);g.lineTo(x2,y2);g.stroke();g.beginPath();g.moveTo(x2,y2);g.lineTo(x2-8*Math.cos(a-.5),y2-8*Math.sin(a-.5));g.lineTo(x2-8*Math.cos(a+.5),y2-8*Math.sin(a+.5));g.closePath();g.fill()}
+function charge(g,x,y,q,R=18){g.fillStyle=q>0?C("--pos"):C("--neg");g.beginPath();g.arc(x,y,R,0,7);g.fill();g.fillStyle="#fff";g.font="bold 22px sans-serif";g.textAlign="center";g.textBaseline="middle";g.fillText(q>0?"+":"−",x,y+1)}
+
+/* 1. Elektrlanish */
+const g1=ctx("#c1");let n1=0,rub=0;
+$("#rub").onclick=()=>{if(!rub&&n1<12)rub=1};
+$("#rub0").onclick=()=>{n1=0;rub=0};
+function d1(){const g=g1;g.clearRect(0,0,600,300);
+ let off=0;if(rub){off=Math.sin(rub/30*Math.PI)*120;rub++;if(rub>=30){rub=0;n1++}}
+ const cx=70+off;
+ g.fillStyle=C("--line");g.fillRect(cx,90,130,100);
+ g.fillStyle=C("--ink");g.font="14px sans-serif";g.textAlign="center";g.fillText("mato",cx+65,215);
+ g.fillStyle=C("--mute");g.fillRect(400,110,150,60);g.fillStyle=C("--ink");g.fillText("tayoqcha",475,195);
+ g.font="bold 16px sans-serif";
+ for(let i=0;i<n1;i++){const x=415+(i%6)*24,y=130+Math.floor(i/6)*24;g.fillStyle=C("--neg");g.fillText("−",x+8,y+8);
+  g.fillStyle=C("--pos");g.fillText("+",cx+20+(i%6)*18,115+Math.floor(i/6)*24)}
+ for(let i=0;i<5;i++){const lift=n1>=2?Math.min(n1,8)*3*(i%2?1:.7):0;g.fillStyle=C("--amb");g.fillRect(410+i*28,270-lift-(rub?0:0),12,6)}
+ $("#o1").textContent=`Ko‘chgan elektronlar: ${n1} (modelda) · tayoqcha zaryadi: −${n1}e` + (n1>=2?" · qog‘oz parchalari tortilyapti":"")+(n1>=12?" · maksimum":"");
+}
+
+/* 2. Kulon */
+const g2=ctx("#c2");
+function d2(){const g=g2,q1=+$("#q1").value,q2=+$("#q2").value,r=+$("#r").value;
+ $("#v21").textContent=q1;$("#v22").textContent=q2;$("#v23").textContent=r;
+ const F=9e9*Math.abs(q1*q2)*1e-12/Math.pow(r/100,2);
+ g.clearRect(0,0,600,300);const x1=60,x2=60+r*10.5,y=150;
+ g.strokeStyle=C("--line");g.setLineDash([4,4]);g.beginPath();g.moveTo(x1,y+40);g.lineTo(x2,y+40);g.stroke();g.setLineDash([]);
+ g.fillStyle=C("--mute");g.font="13px sans-serif";g.textAlign="center";g.fillText("r = "+r+" sm",(x1+x2)/2,y+58);
+ if(q1)charge(g,x1,y,q1);if(q2)charge(g,x2,y,q2);
+ if(F>0){const L=Math.min(110,15+30*Math.log10(1+F)),att=q1*q2<0,s=att?1:-1,col=C("--amb");
+  arrow(g,x1+s*-0+(att?20:-20),y-34,x1+(att?20:-20)+s*L,y-34,col,3);
+  arrow(g,x2+(att?-20:20),y-34,x2+(att?-20:20)-s*L,y-34,col,3)}
+ $("#o2").textContent=q1&&q2?`F = ${fmt(F)} N · ${q1*q2<0?"tortishish":"itarishish"}`:"Zaryad nolga teng: kuch yo‘q";
+}
+
+/* 3. Maydon */
+const g3=ctx("#c3");const ch=[{x:200,y:150,q:1},{x:400,y:150,q:-1}];let drag=null;
+const c3=$("#c3");
+function pt(e){const b=c3.getBoundingClientRect();return{x:(e.clientX-b.left)*600/b.width,y:(e.clientY-b.top)*300/b.height}}
+c3.onpointerdown=e=>{const p=pt(e);drag=ch.find(c=>Math.hypot(c.x-p.x,c.y-p.y)<28)||null;if(drag)c3.setPointerCapture(e.pointerId)};
+c3.onpointermove=e=>{if(!drag)return;const p=pt(e);drag.x=Math.max(20,Math.min(580,p.x));drag.y=Math.max(20,Math.min(280,p.y))};
+c3.onpointerup=()=>drag=null;
+$("#flip").onclick=()=>ch[1].q*=-1;
+function d3(){const g=g3;g.clearRect(0,0,600,300);
+ for(let x=20;x<600;x+=30)for(let y=20;y<300;y+=30){let ex=0,ey=0,skip=false;
+  for(const c of ch){const dx=x-c.x,dy=y-c.y,d=Math.hypot(dx,dy);if(d<22){skip=true;break}ex+=c.q*dx/d**3;ey+=c.q*dy/d**3}
+  if(skip)continue;const m=Math.hypot(ex,ey);g.globalAlpha=Math.min(1,.15+m*7000);
+  const ux=ex/m,uy=ey/m;arrow(g,x-ux*9,y-uy*9,x+ux*9,y+uy*9,C("--acc"),1.6)}
+ g.globalAlpha=1;ch.forEach(c=>charge(g,c.x,c.y,c.q,16));
+}
+
+/* 4. Om qonuni */
+const g4=ctx("#c4");let el=Array.from({length:28},(_,i)=>i/28);
+function pos(s){const P=[[100,60],[500,60],[500,240],[100,240]],L=[400,180,400,180],T=1160;let d=((s%1)+1)%1*T;
+ for(let i=0;i<4;i++){if(d<L[i]){const a=P[i],b=P[(i+1)%4];return[a[0]+(b[0]-a[0])*d/L[i],a[1]+(b[1]-a[1])*d/L[i]]}d-=L[i]}return P[0]}
+function d4(){const g=g4,U=+$("#u").value,R=+$("#rr").value,I=U/R;
+ $("#v41").textContent=U;$("#v42").textContent=R;
+ g.clearRect(0,0,600,300);g.strokeStyle=C("--ink");g.lineWidth=3;
+ g.beginPath();g.moveTo(100,60);g.lineTo(240,60);g.moveTo(360,60);g.lineTo(500,60);g.lineTo(500,100);g.moveTo(500,200);g.lineTo(500,240);g.lineTo(100,240);g.lineTo(100,165);g.moveTo(100,135);g.lineTo(100,60);g.stroke();
+ g.strokeRect(240,45,120,30);g.fillStyle=C("--ink");g.font="13px sans-serif";g.textAlign="center";g.fillText("R = "+R+" Ω",300,36);
+ g.lineWidth=4;g.beginPath();g.moveTo(80,135);g.lineTo(120,135);g.stroke();g.lineWidth=2;g.beginPath();g.moveTo(90,165);g.lineTo(110,165);g.stroke();g.fillText("U = "+U+" V",150,153);
+ g.fillStyle=C("--amb");g.globalAlpha=Math.min(1,.12+I/5);g.beginPath();g.arc(500,150,48,0,7);g.fill();g.globalAlpha=1;
+ g.strokeStyle=C("--ink");g.fillStyle=C("--card");g.beginPath();g.arc(500,150,30,0,7);g.fill();g.stroke();g.fillStyle=C("--amb");g.globalAlpha=Math.min(1,.2+I/4);g.beginPath();g.arc(500,150,20,0,7);g.fill();g.globalAlpha=1;
+ el=el.map(s=>s+I*.0007);g.fillStyle=C("--neg");el.forEach(s=>{const[p,q]=pos(s);g.beginPath();g.arc(p,q,4,0,7);g.fill()});
+ $("#o4").textContent=`I = U/R = ${U}/${R} = ${fmt(I)} A`;
+}
+
+/* 5. Ketma-ket / parallel */
+let mode="s";
+function d5(){const R1=+$("#r1").value,R2=+$("#r2").value,U=12;$("#v51").textContent=R1;$("#v52").textContent=R2;
+ let Rt,I,I1,I2,U1,U2;
+ if(mode==="s"){Rt=R1+R2;I=U/Rt;I1=I2=I;U1=I*R1;U2=I*R2}else{Rt=R1*R2/(R1+R2);I1=U/R1;I2=U/R2;I=I1+I2;U1=U2=U}
+ $("#t5").innerHTML=`<tr><th></th><th>R₁</th><th>R₂</th><th>Butun zanjir</th></tr><tr><td>Qarshilik, Ω</td><td>${R1}</td><td>${R2}</td><td>${fmt(Rt)}</td></tr><tr><td>Kuchlanish, V</td><td>${fmt(U1)}</td><td>${fmt(U2)}</td><td>${U}</td></tr><tr><td>Tok, A</td><td>${fmt(I1)}</td><td>${fmt(I2)}</td><td>${fmt(I)}</td></tr>`;
+ $("#b5").style.width=Math.min(100,I/15*100)+"%";
+ $("#ser").className=mode==="s"?"":"alt";$("#par").className=mode==="p"?"":"alt";
+}
+$("#ser").onclick=()=>{mode="s"};$("#par").onclick=()=>{mode="p"};
+
+function loop(){d1();d2();d3();d4();d5();requestAnimationFrame(loop)}
+loop();
+</script>
+</body>
+</html>
